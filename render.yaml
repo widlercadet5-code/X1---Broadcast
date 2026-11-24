@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: x1-broadcast
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    disk:
+      name: x1-broadcast-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DB_PATH
+        value: /var/data/x1-broadcast.sqlite
+      - key: SESSION_DB_DIR
+        value: /var/data
